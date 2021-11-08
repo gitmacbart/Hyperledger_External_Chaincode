@@ -2,10 +2,15 @@ package main
 
 import (
 	"fmt"
-
+	"os"
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
+
+type serverConfig struct {
+	CCID    string
+	Address string
+}
 
 // SimpleChaincode example simple Chaincode implementation
 type SimpleChaincode struct {
@@ -78,12 +83,15 @@ func get(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 //NOTE - parameters such as ccid and endpoint information are hard coded here for illustration. This can be passed in in a variety of standard ways
 func main() {
 	//The ccid is assigned to the chaincode on install (using the “peer lifecycle chaincode install <package>” command) for instance
-	ccid := "sacc_1.0:f61542ee91bc5c86f2a14b0786b976af54e8343909c4322b6453d99ac98949a3"
-	address := "external_sacc:9998"
+	
+	config := serverConfig{
+		CCID:    os.Getenv("CHAINCODE_ID"),
+		Address: os.Getenv("CHAINCODE_SERVER_ADDRESS"),
+	}
 
 	server := &shim.ChaincodeServer{
-		CCID:    ccid,
-		Address: address,
+		CCID:    config.CCID,
+		Address: config.Address,
 		CC:      new(SimpleChaincode),
 		TLSProps: shim.TLSProperties{
 			Disabled: true,
