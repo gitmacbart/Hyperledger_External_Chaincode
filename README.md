@@ -1,7 +1,7 @@
 # Hyperledger_External_Chaincode
 External chaincode Lab
 
-
+docker-compose up -d rca-org1 rca-org2 rca-tls
 
 cd /external_sacc
 tar cfz code.tar.gz connection.json
