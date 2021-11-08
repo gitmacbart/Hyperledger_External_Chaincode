@@ -255,18 +255,6 @@ services:
     networks:
         - fabric-ca
 
-  cc1-org1:
-    container_name: asset-transfer-basic
-    hostname: asset-transfer-basic.org1.example.com
-    image: sitapseacr.azurecr.io/hlf/asset-transfer-basic:latest
-    environment:
-        - CHAINCODE_ID=basic_1.0:4481f48640a6a848f36d3d71ec70e8948bf2b370ff72f4e7c4be0a6f38f74b4e
-        - CHAINCODE_SERVER_ADDRESS=0.0.0.0:9999
-    ports:
-        - 9999:9999
-    networks:
-        - fabric-ca
-
   sacc-ext:
     container_name: external_sacc
     hostname: external_sacc
