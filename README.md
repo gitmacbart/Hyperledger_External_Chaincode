@@ -1,6 +1,8 @@
 # Hyperledger_External_Chaincode Lab
 ## Build the Network
 
+cd hlf_network
+
 cp -R config /tmp/hyperledger/config/
 cp -R sampleBuilder/ /tmp/hyperledger/sampleBuilder/
 
