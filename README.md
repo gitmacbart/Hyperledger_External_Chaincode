@@ -59,18 +59,4 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer1-or
 
 peer chaincode query -C channel1 -n sacc -c '{"Args":["get","name"]}'
 
-
-
-
-
-
 :smiley:
-
-$$
-\int_0^\infty \mathrm{e}^{-x}\,\mathrm{d}x
-$$ 
-
-:smile:
-:angry:
-
-
