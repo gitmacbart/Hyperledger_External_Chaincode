@@ -22,6 +22,7 @@ osnadmin channel join --channelID ${CHANNEL_NAME} --config-block ${CHANNEL_NAME}
 peer channel join -b ${CHANNEL_NAME}.block
 
 ## Install the Chaincode
+
 cd ../external_sacc
 tar cfz code.tar.gz connection.json
 tar cfz sacc_external.tgz metadata.json code.tar.gz
@@ -57,3 +58,19 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer1-or
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer1-org1 --tls true --cafile $ORDERER_CA --peerAddresses localhost:7051 --tlsRootCertFiles /tmp/hyperledger/org1/peer1/assets/tls-ca/tls-ca-cert.pem --peerAddresses localhost:8051 --tlsRootCertFiles /tmp/hyperledger/org2/peer1/assets/tls-ca/tls-ca-cert.pem --channelID channel1 --name sacc -c '{"Args":["set","name","JohnDoe"]}'
 
 peer chaincode query -C channel1 -n sacc -c '{"Args":["get","name"]}'
+
+
+
+
+
+
+:smiley:
+
+$$
+\int_0^\infty \mathrm{e}^{-x}\,\mathrm{d}x
+$$ 
+
+:smile:
+:angry:
+
+
