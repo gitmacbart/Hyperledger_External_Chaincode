@@ -257,9 +257,10 @@ services:
 
   sacc-ext:
     container_name: external-sacc
+    hostname: external-sacc
     image: hyperledger/sacc-ext
     environment:
-        - CHAINCODE_ID="sacc-ext.0:731ec88b07695e8d67a37435965e95d1ddb3e1ad8a2699a3fbb2defd3adb4dbd"
+        - CHAINCODE_ID=sacc-ext.0:ad9bd9625372542aab49f5218e9bc1f295482ef6e1050529061430029fb2cbd4
         - CHAINCODE_SERVER_ADDRESS=external-sacc:9998
     ports:
         - 9998:9998
