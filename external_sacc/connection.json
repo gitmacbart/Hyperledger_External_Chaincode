@@ -1,5 +1,5 @@
 {
-    "address": "external_sacc:9998",
+    "address": "external-sacc:9998",
     "dial_timeout": "10s",
     "tls_required": false
   }

@@ -111,8 +111,8 @@ services:
     volumes:
         #- /var/run:/host/var/run
         - /tmp/hyperledger/org1/peer1:/tmp/hyperledger/org1/peer1
-        - /Users/arnaud/BlockChain/fabric-samples/asset-transfer-basic/chaincode-external/sampleBuilder:/opt/gopath/src/github.com/hyperledger/fabric-samples
-        - /Users/arnaud/BlockChain/fabric-samples/external_core.yaml:/etc/hyperledger/fabric/core.yaml
+        - /tmp/hyperledger/sampleBuilder:/opt/gopath/src/github.com/hyperledger/fabric-samples
+        - /tmp/hyperledger/config/external_core.yaml:/etc/hyperledger/fabric/core.yaml
     ports:
         - 7051:7051
         - 7062:7062
@@ -171,10 +171,10 @@ services:
       - couchdb1
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/org2/peer1
     volumes:
-        - /var/run:/host/var/run
+        #- /var/run:/host/var/run
         - /tmp/hyperledger/org2/peer1:/tmp/hyperledger/org2/peer1
-        - /Users/arnaud/BlockChain/fabric-samples/asset-transfer-basic/chaincode-external/sampleBuilder:/opt/gopath/src/github.com/hyperledger/fabric-samples
-        - /Users/arnaud/BlockChain/fabric-samples/external_core.yaml:/etc/hyperledger/fabric/core.yaml
+        - /tmp/hyperledger/sampleBuilder:/opt/gopath/src/github.com/hyperledger/fabric-samples
+        - /tmp/hyperledger/config/external_core.yaml:/etc/hyperledger/fabric/core.yaml
     ports:
         - 8051:8051
         - 8062:8062
@@ -256,12 +256,11 @@ services:
         - fabric-ca
 
   sacc-ext:
-    container_name: external_sacc
-    hostname: external_sacc
-    image: hyperledger/external_sacc
+    container_name: external-sacc
+    image: hyperledger/sacc-ext
     environment:
-        - CHAINCODE_ID=sacc_1.0:f61542ee91bc5c86f2a14b0786b976af54e8343909c4322b6453d99ac98949a3
-        - CHAINCODE_SERVER_ADDRESS=external_sacc:9998
+        - CHAINCODE_ID="sacc-ext.0:731ec88b07695e8d67a37435965e95d1ddb3e1ad8a2699a3fbb2defd3adb4dbd"
+        - CHAINCODE_SERVER_ADDRESS=external-sacc:9998
     ports:
         - 9998:9998
     networks:

@@ -89,6 +89,9 @@ func main() {
 		Address: os.Getenv("CHAINCODE_SERVER_ADDRESS"),
 	}
 
+	//CCIDtmp := "sacc-ext.0:731ec88b07695e8d67a37435965e95d1ddb3e1ad8a2699a3fbb2defd3adb4dbd"
+	//Addresstmp := "external-sacc:9998"
+
 	server := &shim.ChaincodeServer{
 		CCID:    config.CCID,
 		Address: config.Address,
