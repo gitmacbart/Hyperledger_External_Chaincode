@@ -58,8 +58,8 @@ services:
         - 7055:7055
 
 
-  couchdb0:
-    container_name: couchdb0
+  couchdb-org1:
+    container_name: couchdb-org1
     image: couchdb:3.1.1
     labels:
       service: hyperledger-fabric
@@ -98,7 +98,7 @@ services:
         - CORE_PEER_ADDRESSAUTODETECT=true
         - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7062
         - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
+        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-org1:5984
         # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
         # provide the credentials for ledger to connect to CouchDB.  The username and password must
         # match the username and password set for the associated CouchDB.
@@ -106,7 +106,7 @@ services:
         - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
         #- CORE_CHAINCODE_EXTERNALBUILDERS=[{name:external-sample-builder,path:/opt/gopath/src/github.com/hyperledger/fabric-samples}]
     depends_on:
-      - couchdb0
+      - couchdb-org1
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/org1/peer1
     volumes:
         #- /var/run:/host/var/run
@@ -119,8 +119,8 @@ services:
     networks:
         - fabric-ca
 
-  couchdb1:
-    container_name: couchdb1
+  couchdb-org2:
+    container_name: couchdb-org2
     image: couchdb:3.1.1
     labels:
       service: hyperledger-fabric
@@ -160,7 +160,7 @@ services:
         - CORE_PEER_CHAINCODEADDRESS=peer1-org2:8062
         - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8062
         - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb0:5984
+        - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb-org2:5984
         # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
         # provide the credentials for ledger to connect to CouchDB.  The username and password must
         # match the username and password set for the associated CouchDB.
@@ -168,7 +168,7 @@ services:
         - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=adminpw
         #- CORE_CHAINCODE_EXTERNALBUILDERS=[{name:external-sample-builder,path:/opt/gopath/src/github.com/hyperledger/fabric-samples}]
     depends_on:
-      - couchdb1
+      - couchdb-org2
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/org2/peer1
     volumes:
         #- /var/run:/host/var/run
@@ -264,5 +264,17 @@ services:
         - CHAINCODE_SERVER_ADDRESS=external-sacc:9998
     ports:
         - 9998:9998
+    networks:
+        - fabric-ca
+
+  fchain-ext:
+    container_name: fchain-smartcontract
+    hostname: fchain-smartcontract
+    image: sitapseacr.azurecr.io/sitapseacr/flightchain3/flightchain.smartcontract-fly2plan-fabric2
+    environment:
+        - CHAINCODE_ID=fchain:f059e0d26bd625b706284a0ec197da63ffb8b4782398d57ba5a81e98bb9534b3
+        - CHAINCODE_SERVER_ADDRESS=fchain-smartcontract:9999
+    ports:
+        - 9999:9999
     networks:
         - fabric-ca
